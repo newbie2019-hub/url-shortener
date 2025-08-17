@@ -1,0 +1,26 @@
+services:
+  postgres_test:
+    image: postgres:alpine
+    container_name: postgres_test
+    restart: 'no'
+    env_file:
+      - .env.test
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password
+    ports:
+      - '5444:5432'
+    volumes:
+      - pg_data_test:/var/lib/postgresql/data
+
+  redis_test:
+    image: redis:alpine
+    container_name: redis_test
+    ports:
+      - '6380:6379'
+    volumes:
+      - redis_data_test:/data
+
+volumes:
+  pg_data_test:
+  redis_data_test:
