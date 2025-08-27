@@ -31,6 +31,7 @@ export class TransformResponseInterceptor implements NestInterceptor {
                   data: null,
                 };
               }
+
               if (
                 isPreTransformedResponse<string | number | Record<string, any>>(
                   response,

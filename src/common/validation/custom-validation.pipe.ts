@@ -44,7 +44,7 @@ export class CustomValidationPipe extends ValidationPipe {
         });
 
         throw new BadRequestException({
-          message: result,
+          errors: result,
           error: 'Bad Request',
           statusCode: 422,
         });

@@ -10,5 +10,6 @@ module.exports = {
   testEnvironment: 'node',
   moduleNameMapper: {
     '^src/(.*)$': '<rootDir>/src/$1', // This maps 'src/*' to your actual src directory
+    '^test/(.*)$': '<rootDir>/test/$1', // This maps 'test/*' to your actual test directory
   },
 };

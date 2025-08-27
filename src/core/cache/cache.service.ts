@@ -22,6 +22,8 @@ export class CacheService {
   }
 
   async onModuleDestroy() {
-    await this.cache.disconnect();
+    if (typeof this.cache?.disconnect === 'function') {
+      await this.cache.disconnect();
+    }
   }
 }
