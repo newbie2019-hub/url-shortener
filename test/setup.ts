@@ -39,6 +39,7 @@ beforeEach(async () => {
 
 afterAll(async () => {
   await app.close();
+  await databaseService.$disconnect();
 });
 
 // Reset database and cache
@@ -47,4 +48,4 @@ afterEach(async () => {
   await databaseService.reset();
 });
 
-export { server };
+export { server, app };

@@ -19,7 +19,9 @@ export class DatabaseService extends PrismaClient implements OnModuleInit {
       .join(', ');
 
     try {
-      await this.$executeRawUnsafe(`TRUNCATE TABLE ${tables} CASCADE;`);
+      await this.$executeRawUnsafe(
+        `TRUNCATE TABLE ${tables} RESTART IDENTITY CASCADE;`,
+      );
     } catch {
       // Handle error
     }

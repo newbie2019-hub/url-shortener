@@ -18,12 +18,32 @@ export class CacheService {
   }
 
   async reset(): Promise<void> {
-    await this.cache.clear();
+    if (this.cache.stores) {
+      const stores = this.cache.stores;
+      await Promise.all(
+        stores.map(async (store) => {
+          if (
+            store?.opts?.namespace === 'memory' &&
+            typeof store.clear === 'function'
+          ) {
+            await store.clear();
+          }
+        }),
+      );
+    }
   }
 
   async onModuleDestroy() {
-    if (typeof this.cache?.disconnect === 'function') {
-      await this.cache.disconnect();
+    // Ensure all stores are disconnected
+    if (this.cache.stores) {
+      const stores = this.cache.stores;
+      await Promise.all(
+        stores.map((store) => {
+          if (typeof store.disconnect === 'function') {
+            return store.disconnect();
+          }
+        }),
+      );
     }
   }
 }
